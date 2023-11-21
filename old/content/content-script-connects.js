@@ -7,12 +7,6 @@ function checkContacts(openedTabIndex) {
   setTimeout(function () {
     const liElements = document.querySelectorAll('li.mn-connection-card.artdeco-list');
     const extractedData = [...liElements].map(extractDataFromConnectionCard);
-
-    //chrome.runtime.sendMessage({ action: "removeNewTab" });
-    saveDataToStorage(extractedData);
-    chrome.runtime.sendMessage( { action: "updateData", data: extractedData} )
-    const notificationMessage = `Extracted data from ${extractedData.length} elements`;
-    showNotification(notificationMessage);
   }, 3000);
 
   function extractDataFromConnectionCard(liEl) {

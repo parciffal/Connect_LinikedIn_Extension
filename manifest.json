@@ -1,44 +1,23 @@
 {
+  "name": "LinkedIn Connection Checker",
+  "version": "1.0",
+  "description": "Checks LinkedIn connections and adds new ones to Google Sheets",
   "manifest_version": 3,
-  "name": "LinkedIn Connector",
-  "version": "1.0.0",
-  "description": "Check LinkedIn connections and send data to Google Spreadsheet",
-  "icons": {
-    "32": "/icons/icon-32.png",
-    "64": "/icons/icon-64.png",
-    "128": "/icons/icon-128.png"
-  },
   "permissions": [
+    "downloads",
     "activeTab",
-    "storage",
     "https://www.linkedin.com/*",
-    "https://sheets.googleapis.com/"
-  ],
-  "content_scripts": [
-    {
-      "matches": ["https://www.linkedin.com/mynetwork/invite-connect/connections/"],
-      "run_at": "document_end",
-      "all_frames": false,
-      "js": ["/content/content-script-connects.js"]
-    },
-    {
-      "matches": ["https://www.linkedin.com/*"],
-      "run_at": "document_end",
-      "all_frames": false,
-      "js": ["/content/content-script.js"]
-    }
+    "https://sheets.googleapis.com/",
+    "tabs",
+    "storage"
   ],
   "background": {
-    "service_worker": "/background/background.js",
-    "type": "module"
+    "service_worker": "background.js"
   },
-  "action": {
-    "default_popup": "/page/popup.html",
-    "default_icon": {
-      "32": "/icons/icon-32.png",
-      "64": "/icons/icon-64.png",
-      "128": "/icons/icon-128.png"
+  "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/*"],
+      "js": ["contentScript.js"]
     }
-  },
-  "host_permissions": ["https://www.linkedin.com/*"]
+  ]
 }
